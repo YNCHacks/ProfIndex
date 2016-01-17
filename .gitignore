@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Virtualenv Folder
+/profindex
+
 # Distribution / packaging
 .Python
 env/
