@@ -6,9 +6,14 @@
 """
 
 from app import app
+from app.controllers.controller import get_name
 from flask import render_template, redirect, url_for, request
 
 @app.route("/")
-@app.route("/index")
 def index():
-    return render_template("index.html")
+    name = get_name()
+    return render_template("index.html", name=name)
+
+@app.route("/hello")
+def hello():
+    return render_template("hello.html", food="sushi")
