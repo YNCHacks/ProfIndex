@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Initialization of the app
+Initialization of the app (In general don't need to touch)
 """
 
 from flask import Flask
