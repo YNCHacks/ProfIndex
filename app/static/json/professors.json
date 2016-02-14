@@ -1,0 +1,13 @@
+{
+  "john.mulaney@u.yale-nus.edu.sg":
+      {
+        "name": "John Mulaney",
+        "id": "KJOIq09039KLJ",
+        "password": "DLKFJ320923LKJSDf",
+        "email": "john.mulaney@u.yale-nus.edu.sg",
+        "picture_url": "http://www.blah.yale-nus.edu.sg",
+        "availability": true,
+        "office": "Elm 02-15F",
+        "office_hours": "Monday 10:00 - 12:00, Thursday 13:00 - 15:00"
+      }
+}
