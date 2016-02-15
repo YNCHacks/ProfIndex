@@ -18,7 +18,7 @@ class Controller:
         result = self.data.search_professor("name", name)
         return result
 
-    def authenticate(email, password):
+    def authenticate(self, email, password):
         hashed_pw = hash_password(password)
         isSuccess = self.data.authenticate(email, hashed_pw)
         if isSuccess == true:
@@ -34,11 +34,11 @@ class Controller:
 
     def add_professor(self, prof_details):
         password = prof_details["password"]
-        hashed_pw = hash_password(password)
+        hashed_pw = self.hash_password(password)
         prof_details["password"] = hashed_pw
         self.data.add_professor(prof_details)
 
-    def hash_password(password):
+    def hash_password(self, password):
         hasher = hashlib.sha1()
         hasher.update(password)
         hashed_pw = hasher.hexdigest()
@@ -46,5 +46,5 @@ class Controller:
 
     def update_value(self,email, param, value):
         if param = "password":
-            value = hash_password(value)
+            value = self.hash_password(value)
         self.data.update_professor(email, param, value)
