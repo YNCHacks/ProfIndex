@@ -1,0 +1,36 @@
+.nav {
+    background-color: black;
+    color:white;
+    padding:12px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: right;
+    margin-bottom: 75px;
+}
+
+.profile {
+    height:250px;
+    width: 250px;
+    border-radius: 250px;
+    margin: 0 auto;
+}
+
+body {
+    background:#f1f1f1;
+}
+
+h1 {
+    margin:10px auto 0 auto;
+    text-align:center;
+    font-weight:200;
+    color:#4b4b4b;
+}
+
+#profInput {
+    align: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
