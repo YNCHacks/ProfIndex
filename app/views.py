@@ -4,6 +4,8 @@ from app import app
 from app.controllers.controller import *
 from flask import render_template, request, g, session
 
+app.secret_key = '\x90\xfd*"\x9e\'\xe2]\xbd\xa3\x8f,\xca\\\x0e\xd9\x92\xdd\xdc~\xcfKM\x8d'
+
 """
     The views file.
     This is where all the view functions go
@@ -26,8 +28,10 @@ def login():
     email = request.form['email']
     password = request.form['password']
     result = controller.authenticate(email, password)
-    if (result != "Failed Login. Please check your entered credentials."):
-        return render_template('account.html', result)
+    if (result[0]):
+        session['username'] = result[1].name
+        return render_template('account.html', result=result[1])
+    return render_login_page()
 
 @app.route('/search_prof/', methods=['POST'])
 def render_prof_page():
@@ -38,3 +42,16 @@ def render_prof_page():
     else:
         status = "Is not in "
     return render_template('prof.html', prof=prof.name, status=status + prof.office, image=prof.picture_url)
+
+@app.route('/update_prof_availability/<email>', methods=['POST'])
+def update_prof_availability(email):
+    prof_availability = request.form.get('avail', None)
+    if (prof_availability == "on"):
+        prof_availability = True
+    else:
+        prof_availability = False
+    controller.update_value(email, 'availability', prof_availability)
+    if ('username' in session):
+        prof_object = controller.search_prof(session['username'])
+        return render_template('account.html', result=prof_object)
+    return render_template('index.html')
