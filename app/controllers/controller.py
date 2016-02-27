@@ -5,7 +5,7 @@
     This module holds the Controller
     component of the app.
 """
-from app.models.database_controller import *
+from app.models.database_controller import DatabaseConnector
 import hashlib
 
 class Controller:
@@ -15,15 +15,13 @@ class Controller:
     WRONG_CREDENTIALS = "Failed Login. Please check your entered credentials."
 
     def search_prof(self, name):
-        result = self.data.search_professor("name", name)
+        result = self.data.search_professor('name', name)
         return result
 
     def authenticate(self, email, password):
-        hashed_pw = hash_password(password)
-        isSuccess = self.data.authenticate(email, hashed_pw)
-        if isSuccess == true:
-            return isSuccess[1]
-        return WRONG_CREDENTIALS
+        #hashed_pw = self.hash_password(password)
+        isSuccess = self.data.authenticate(email, password)
+        return isSuccess
 
     def get_all_professors(self):
         return self.data.get_all_professors()
@@ -45,6 +43,6 @@ class Controller:
         return hashed_pw
 
     def update_value(self,email, param, value):
-        if param = "password":
+        if param == "password":
             value = self.hash_password(value)
         self.data.update_professor(email, param, value)
