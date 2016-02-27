@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from app import app
-from flask import render_template, request
+from app.controllers.controller import *
+from flask import render_template, request, g, session
 
 """
     The views file.
@@ -10,24 +11,30 @@ from flask import render_template, request
     Make sure to add docstrings!
 """
 
+controller = Controller()
+
 @app.route('/')
 def index():
-    return render_template('index.html', name="Ross")
+    return render_template('index.html')
 
 @app.route('/login/')
 def render_login_page():
     return render_template('login.html')
 
-
-
 @app.route('/validate_login_information/', methods=['POST'])
 def login():
-    username = request.form['username']
+    email = request.form['email']
     password = request.form['password']
-    return render_template('account.html', username=username, password=password, image="https://www.yale-nus.edu.sg/wp-content/uploads/2015/07/stanislav-presolski-headshot-380x507.jpg")
+    result = controller.authenticate(email, password)
+    if (result != "Failed Login. Please check your entered credentials."):
+        return render_template('account.html', result)
 
 @app.route('/search_prof/', methods=['POST'])
 def render_prof_page():
     prof_name = request.form['prof_name']
-    office = "RC1-asdf"
-    return render_template('prof.html', prof=prof_name, status="Is in office " + office, image="https://www.yale-nus.edu.sg/wp-content/uploads/2015/07/stanislav-presolski-headshot-380x507.jpg")
+    prof = controller.search_prof(prof_name)
+    if (prof.availability == True):
+        status = "Is in office "
+    else:
+        status = "Is not in "
+    return render_template('prof.html', prof=prof.name, status=status + prof.office, image=prof.picture_url)
