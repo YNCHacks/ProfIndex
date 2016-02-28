@@ -76,6 +76,9 @@ class DatabaseConnector:
         for key, item in self.database.items():
             if item[param] == value:
                 return self.convert_to_professor(item)
+            elif param == "name":
+                if value.lower() in item[param].lower():
+                    return self.convert_to_professor(item)
         return "Professor not found"
 
     def authenticate(self, email, password):
