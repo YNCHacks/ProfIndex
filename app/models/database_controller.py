@@ -92,8 +92,8 @@ class DatabaseConnector:
         if email not in self.database:
             return (False, "")
 
-        if self.database["email"]["password"] == password:
-            return (True, self.convert_to_professor(self.database["email"]))
+        if self.database[email]["password"] == password:
+            return (True, self.convert_to_professor(self.database[email]))
         else:
             return (False, "")
 
