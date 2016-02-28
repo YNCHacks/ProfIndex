@@ -73,7 +73,7 @@ class DatabaseConnector:
         Returns
             A Professor object if found, string if not
         """
-        for item in self.database.items():
+        for key, item in self.database.items():
             if item[param] == value:
                 return self.convert_to_professor(item)
         return "Professor not found"
