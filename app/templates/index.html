@@ -1,7 +1,22 @@
 <html>
 <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/static/css/material.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  Hello {{name}}.
+    <div class="nav" style="margin-bottom: 100px;">
+        <a href="/login">Login</a>
+    </div>
+    <a href="/"><h1>Prof_Index</h1></a>
+    <form action="/search_prof/" method="post" style="text-align:center;">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="profInput">
+            <input class="mdl-textfield__input" type="text" name="prof_name">
+            <label class="mdl-textfield__label">Who are you looking for?</label>
+        </div>
+    </form>
+
 </body>
 </html>

@@ -1,0 +1,34 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/static/css/material.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/switch.css">
+    <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="nav" style="text-align:center;">
+        <a href="/" style="font-size:13pt;">Prof_Index</a>
+        <a href="/login" style="float:right;">{{result.name}}</a>
+    </div>
+    <!--<div class="profile" style="background-image: url('{{image}}'); background-size: 250px auto; margin: 0 auto;margin-bottom:25px;"></div>-->
+    <h1>{{result.name}}</h1>
+    <form action="/update_prof_availability/{{result.email}}" method="post" style="text-align:center;">
+        <span>Are you in your office?</span>
+        <br>
+        <span style="width:0px;">
+            <div id="toggles">
+                {% if result.availability %}
+                <input type="checkbox" name="avail" id="checkbox1" class="ios-toggle" onclick="this.form.submit();" checked/>
+                <label for="checkbox1" class="checkbox-label" data-off="no" data-on="yes"></label>
+                {% else %}
+                <input type="checkbox" name="avail" id="checkbox1" class="ios-toggle" onclick="this.form.submit();" unchecked/>
+                <label for="checkbox1" class="checkbox-label" data-off="no" data-on="yes"></label>
+                {% endif %}
+            </div>
+        </span>
+    </form>
+
+</body>
+</html>
