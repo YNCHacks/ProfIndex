@@ -17,11 +17,25 @@ controller = Controller()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    names = controller.get_all_professor_names()
+    return render_template('index.html', names=names)
 
 @app.route('/login/')
 def render_login_page():
     return render_template('login.html')
+
+@app.route('/create_account/')
+def render_create_account_page():
+    return render_template('create_account.html')
+
+@app.route('/prof/<id>')
+def render_permalinked_prof_page(id):
+    prof = search_prof('id', id)
+    if (prof.availability == True):
+        status = "Is in office "
+    else:
+        status = "Is not in "
+    return render_template('prof.html', prof=prof.name, status=status + prof.office, image=prof.picture_url)
 
 @app.route('/validate_login_information/', methods=['POST'])
 def login():
