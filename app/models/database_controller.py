@@ -102,7 +102,7 @@ class DatabaseConnector:
 
     def get_all_professors(self):
         """ Returns array of all Professor objects """
-        return [self.convert_to_professor(professor) for professor in self.database.items()]
+        return [self.convert_to_professor(professor) for key, professor in self.database.items()]
 
     def update_professor(self, email, param, value):
         """
