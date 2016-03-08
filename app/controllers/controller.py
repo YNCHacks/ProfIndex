@@ -14,7 +14,7 @@ class Controller:
 
     WRONG_CREDENTIALS = "Failed Login. Please check your entered credentials."
 
-    def search_prof(self, param, name):
+    def search_prof(self, name, param='name'):
         result = self.data.search_professor(param, name)
         return result
 
@@ -28,6 +28,7 @@ class Controller:
 
     def get_all_professor_names(self):
         professor = self.get_all_professors()
+        print([prof.name for prof in professor])
         return [prof.name for prof in professor]
 
     def add_professor(self, prof_details):

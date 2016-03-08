@@ -28,9 +28,9 @@ def render_login_page():
 def render_create_account_page():
     return render_template('create_account.html')
 
-@app.route('/prof/<id>')
-def render_permalinked_prof_page(id):
-    prof = search_prof('id', id)
+@app.route('/prof/<uuid>')
+def render_permalinked_prof_page(uuid):
+    prof = controller.search_prof(uuid, 'id')
     if (prof.availability == True):
         status = "Is in office "
     else:
