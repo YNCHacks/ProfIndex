@@ -24,6 +24,7 @@ class DatabaseConnector:
         print "[DatabaseConnector::load_database] Loading database"
         fp = open(json_file_path, "r+")
         store = json.load(fp)
+        print store
         fp.close()
         return store
         # try:
