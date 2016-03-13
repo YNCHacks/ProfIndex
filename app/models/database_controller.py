@@ -9,9 +9,7 @@
 ### Imports ###
 from professor import Professor
 import os, json
-
-### Global variables ###
-json_file_path = "app/static/json/professors.json"
+from global_vars import json_file_path
 
 class DatabaseConnector:
     """
