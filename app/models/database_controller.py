@@ -9,9 +9,7 @@
 ### Imports ###
 from professor import Professor
 import os, json
-
-### Global variables ###
-json_file_path = "app/static/json/professors.json"
+from global_vars import json_file_path
 
 class DatabaseConnector:
     """
@@ -24,14 +22,19 @@ class DatabaseConnector:
     def load_database(self):
         """ Loads json database into memory """
         print "[DatabaseConnector::load_database] Loading database"
-        try:
-            with open(json_file_path, "r+") as fp:
-                store = json.load(fp)
-                fp.close()
-                return store
-        except:
-            print "[DatabaseConnector::load_database] Error in loading database"
-            return
+        fp = open(json_file_path, "r")
+        store = json.load(fp)
+        print store
+        fp.close()
+        return store
+        # try:
+        #     with open(json_file_path, "r+") as fp:
+        #         store = json.load(fp)
+        #         fp.close()
+        #         return store
+        # except:
+        #     print "[DatabaseConnector::load_database] Error in loading database"
+        #     return
 
     def write_to_database(self):
         """ Writes to database """
@@ -102,7 +105,9 @@ class DatabaseConnector:
 
     def get_all_professors(self):
         """ Returns array of all Professor objects """
-        return [self.convert_to_professor(professor) for professor in self.database.items()]
+        if self.database is None:
+            self.database = self.load_database()
+        return [self.convert_to_professor(professor) for key, professor in self.database.items()]
 
     def update_professor(self, email, param, value):
         """

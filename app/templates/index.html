@@ -3,7 +3,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/static/css/material.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var availableTags = [];
+            {% for name in names %}
+            availableTags.push("{{name}}")
+            {% endfor %}
+            $("#prof_name").autocomplete({
+                source: availableTags
+            });
+        });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -13,7 +28,7 @@
     <a href="/"><h1>Prof_Index</h1></a>
     <form action="/search_prof/" method="post" style="text-align:center;">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="profInput">
-            <input class="mdl-textfield__input" type="text" name="prof_name">
+            <input class="mdl-textfield__input" type="text" name="prof_name" id="prof_name">
             <label class="mdl-textfield__label">Who are you looking for?</label>
         </div>
     </form>
