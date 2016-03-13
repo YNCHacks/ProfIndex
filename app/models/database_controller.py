@@ -22,7 +22,7 @@ class DatabaseConnector:
     def load_database(self):
         """ Loads json database into memory """
         print "[DatabaseConnector::load_database] Loading database"
-        fp = open(json_file_path, "r+")
+        fp = open(json_file_path, "r")
         store = json.load(fp)
         print store
         fp.close()
@@ -105,6 +105,8 @@ class DatabaseConnector:
 
     def get_all_professors(self):
         """ Returns array of all Professor objects """
+        if self.database is None:
+            self.database = self.load_database()
         return [self.convert_to_professor(professor) for key, professor in self.database.items()]
 
     def update_professor(self, email, param, value):
