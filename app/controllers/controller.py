@@ -19,7 +19,7 @@ class Controller:
         return result
 
     def authenticate(self, email, password):
-        #hashed_pw = self.hash_password(password)
+        hashed_pw = self.hash_password(password)
         isSuccess = self.data.authenticate(email, password)
         return isSuccess
 
