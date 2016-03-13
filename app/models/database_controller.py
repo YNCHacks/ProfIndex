@@ -11,6 +11,9 @@ from professor import Professor
 import os, json
 from global_vars import json_file_path
 
+temp = {"john.mulaney@u.yale-nus.edu.sg": {"name": "John Mulaney", "office": "Elm 02-15F", "office_hours": "Monday 10:00 - 12:00, Thursday 13:00 - 15:00", "picture_url": "https://www.yale-nus.edu.sg/wp-content/uploads/2015/07/stanislav-presolski-headshot-380x507.jpg", "availability": true, "email": "john.mulaney@u.yale-nus.edu.sg", "password": "DLKFJ320923LKJSDf", "id": "KJOIq09039KLJ"}}
+
+
 class DatabaseConnector:
     """
     This class implements model functions to be used by the controller
@@ -107,6 +110,8 @@ class DatabaseConnector:
         """ Returns array of all Professor objects """
         if self.database is None:
             self.database = self.load_database()
+        if self.database is None:
+            self.database = temp
         return [self.convert_to_professor(professor) for key, professor in self.database.items()]
 
     def update_professor(self, email, param, value):
