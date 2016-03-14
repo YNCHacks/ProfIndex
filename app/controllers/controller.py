@@ -16,7 +16,9 @@ class Controller:
 
     def search_prof(self, name, param='name'):
         result = self.data.search_professor(param, name)
-        return result
+        if (result == "Professor not found"):
+            return (False, "")
+        return (True, result)
 
     def authenticate(self, email, password):
         hashed_pw = self.hash_password(password)

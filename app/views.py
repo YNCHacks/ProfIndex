@@ -50,13 +50,16 @@ def login():
 @app.route('/search_prof/', methods=['POST'])
 def render_prof_page():
     prof_name = request.form['prof_name']
-    prof = controller.search_prof(prof_name)
-    if (prof.availability == True):
-        status = "Is in office "
-    else:
-        status = "Is not in "
-    return render_template('prof.html', prof=prof.name, status=status + prof.office, image=prof.picture_url)
-
+    result = controller.search_prof(prof_name)
+    if (result[0]):
+        prof = result[1]
+        if (prof.availability == True):
+            status = "Is in office "
+        else:
+            status = "Is not in "
+        return render_template('prof.html', prof=prof.name, status=status + prof.office, image=prof.picture_url)
+    return index()
+    
 @app.route('/update_prof_availability/<email>', methods=['POST'])
 def update_prof_availability(email):
     prof_availability = request.form.get('avail', None)
