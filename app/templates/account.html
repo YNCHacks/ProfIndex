@@ -5,12 +5,18 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/switch.css">
     <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        var email = '{{result.email}}';
+    </script>
+    <script src="/static/js/account_json.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="nav" style="text-align:center;">
         <a href="/" style="font-size:13pt;">Prof_Index</a>
-        <a href="/login" style="float:right;">{{result.name}}</a>
+        <a href="/logout" style="float:right;">Logout</a>
     </div>
     <!--<div class="profile" style="background-image: url('{{image}}'); background-size: 250px auto; margin: 0 auto;margin-bottom:25px;"></div>-->
     <h1>{{result.name}}</h1>
@@ -20,10 +26,10 @@
         <span style="width:0px;">
             <div id="toggles">
                 {% if result.availability %}
-                <input type="checkbox" name="avail" id="checkbox1" class="ios-toggle" onclick="this.form.submit();" checked/>
+                <input type="checkbox" name="avail" id="checkbox1" class="ios-toggle" onclick="update();" checked/>
                 <label for="checkbox1" class="checkbox-label" data-off="no" data-on="yes"></label>
                 {% else %}
-                <input type="checkbox" name="avail" id="checkbox1" class="ios-toggle" onclick="this.form.submit();" unchecked/>
+                <input type="checkbox" name="avail" id="checkbox1" class="ios-toggle" onclick="update();" unchecked/>
                 <label for="checkbox1" class="checkbox-label" data-off="no" data-on="yes"></label>
                 {% endif %}
             </div>

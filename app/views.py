@@ -41,6 +41,11 @@ def render_login_page():
 def render_signup_page():
     return render_template('signup.html')
 
+@app.route('/logout/')
+def logout():
+    session.pop('username', None)
+    return render_template('index.html')
+
 @app.route('/new_user/', methods=['POST'])
 def create_new_user():
     email = request.form['email']
@@ -90,15 +95,16 @@ def render_prof_page():
             status = "Is not in "
         return render_template('prof.html', prof=prof.name, status=status + prof.office, image=prof.picture_url)
     return index()
-    
-@app.route('/update_prof_availability/<email>', methods=['POST'])
-def update_prof_availability(email):
-    prof_availability = request.form.get('avail', None)
-    if (prof_availability == "on"):
+
+@app.route('/update_prof_availability/')
+def update_prof_availability():
+    prof_email = request.args.get('prof_email', '1', type=str)
+    prof_availability = request.args.get('state', '1', type=str)
+    if (prof_availability == "true"):
         prof_availability = True
     else:
         prof_availability = False
-    controller.update_value(email, 'availability', prof_availability)
+    controller.update_value(prof_email, 'availability', prof_availability)
     if ('username' in session):
         prof_object = controller.search_prof(session['username'])
         return render_template('account.html', result=prof_object)
