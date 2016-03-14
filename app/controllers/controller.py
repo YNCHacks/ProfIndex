@@ -22,7 +22,7 @@ class Controller:
 
     def authenticate(self, email, password):
         hashed_pw = self.hash_password(password)
-        isSuccess = self.data.authenticate(email, password)
+        isSuccess = self.data.authenticate(email, hashed_pw)
         return isSuccess
 
     def get_all_professors(self):

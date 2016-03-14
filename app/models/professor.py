@@ -38,7 +38,7 @@ class Professor:
         self.office = prof_details["office"]
         self.office_hours = prof_details["office_hours"]
 
-    def get_json():
+    def get_json(self):
         """
         Return professor attributes in json form
         """

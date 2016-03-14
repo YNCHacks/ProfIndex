@@ -1,0 +1,47 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/material.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="nav">
+        <a href="login.html">Login</a>
+    </div>
+    <a href="/"><h1>Prof_Index</h1></a>
+    <form action="/new_user/" method="post" style="text-align:center;">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="username" style="width:11%; margin-right:1%;">
+            <input class="mdl-textfield__input" type="text" name="fname">
+            <label class="mdl-textfield__label">First Name<label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="username" style="width:11%;">
+            <input class="mdl-textfield__input" type="text" name="lname">
+            <label class="mdl-textfield__label">Last Name<label>
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="username" style="width:23%;">
+            <input class="mdl-textfield__input" type="text" name="email">
+            <label class="mdl-textfield__label">Email<label>
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="password" style="width:23%;">
+            <input class="mdl-textfield__input" type="password" name="password">
+            <label class="mdl-textfield__label">Password<label>
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="username" style="width:23%;">
+            <input class="mdl-textfield__input" type="text" name="location">
+            <label class="mdl-textfield__label">Office Location<label>
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="username" style="width:23%;">
+            <input class="mdl-textfield__input" type="text" name="hours">
+            <label class="mdl-textfield__label">Office Hours<label>
+        </div>
+        <br>
+        <button class="mdl-button mdl-js-button mdl-button--raised" action="submit" style="width:23%;">Submit</button>
+    </form>
+
+</body>
+</html>
