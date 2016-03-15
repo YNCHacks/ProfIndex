@@ -22,19 +22,14 @@ class DatabaseConnector:
     def load_database(self):
         """ Loads json database into memory """
         print "[DatabaseConnector::load_database] Loading database"
-        fp = open(json_file_path, "r")
-        store = json.load(fp)
-        print store
-        fp.close()
-        return store
-        # try:
-        #     with open(json_file_path, "r+") as fp:
-        #         store = json.load(fp)
-        #         fp.close()
-        #         return store
-        # except:
-        #     print "[DatabaseConnector::load_database] Error in loading database"
-        #     return
+        try:
+            with open(json_file_path, "r+") as fp:
+                store = json.load(fp)
+                fp.close()
+                return store
+        except:
+            print "[DatabaseConnector::load_database] Error in loading database"
+            return
 
     def write_to_database(self):
         """ Writes to database """
