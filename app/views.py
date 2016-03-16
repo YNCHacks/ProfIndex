@@ -44,7 +44,7 @@ def load_user(username):
 """
 @app.route('/')
 def index():
-    print(current_user)
+    print(current_user.is_authenticated)
     names = controller.get_all_professor_names()
     return render_template('index.html', names=names)
 
