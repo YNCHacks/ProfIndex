@@ -2,7 +2,9 @@
 
 from app import app
 from app.controllers.controller import *
-from flask import render_template, request, g, session
+from flask import render_template, request, g, session, redirect, url_for
+from flask.ext.login import LoginManager, login_required
+from functools import wraps
 import urllib2, re
 
 app.secret_key = '\x90\xfd*"\x9e\'\xe2]\xbd\xa3\x8f,\xca\\\x0e\xd9\x92\xdd\xdc~\xcfKM\x8d'
@@ -15,6 +17,9 @@ app.secret_key = '\x90\xfd*"\x9e\'\xe2]\xbd\xa3\x8f,\xca\\\x0e\xd9\x92\xdd\xdc~\
 """
 
 controller = Controller()
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'render_login_page'
 
 def get_image_url(fname, lname):
     url = "https://www.yale-nus.edu.sg/about/faculty/" + fname + "-" + lname
@@ -32,16 +37,17 @@ def index():
     names = controller.get_all_professor_names()
     return render_template('index.html', names=names)
 
+@app.route('/signup/')
+def render_signup_page():
+    return render_template('signup.html')
+
 @app.route('/login/')
 def render_login_page():
     names = controller.get_all_professor_names()
     return render_template('login.html')
 
-@app.route('/signup/')
-def render_signup_page():
-    return render_template('signup.html')
-
 @app.route('/logout/')
+@login_required
 def logout():
     session.pop('username', None)
     return render_template('index.html')
@@ -56,9 +62,14 @@ def create_new_user():
     location = request.form['location']
     hours = request.form['hours']
     img_url = get_image_url(fname, lname)
-    prof_properties = {"name": name, "email": email, "password": password, "office": location, "office_hours": hours, "availability": False, "picture_url": img_url, "id": "asdfasdf"}
+    prof_properties = {"name": name, "email": email, "password": password, "office": location, "office_hours": hours, "availability": False, "picture_url": img_url, 'id': 'id'}
     controller.add_professor(prof_properties)
-    return render_login_page()
+    
+    result = controller.authenticate(email, password)
+    if (result[0]):
+        session['username'] = result[1].name
+        return render_template('account.html', result=result[1])
+    return render_login_page() #change to error page
 
 @app.route('/create_account/')
 def render_create_account_page():
@@ -97,6 +108,7 @@ def render_prof_page():
     return index()
 
 @app.route('/update_prof_availability/')
+@login_required
 def update_prof_availability():
     prof_email = request.args.get('prof_email', '1', type=str)
     prof_availability = request.args.get('state', '1', type=str)
@@ -105,7 +117,5 @@ def update_prof_availability():
     else:
         prof_availability = False
     controller.update_value(prof_email, 'availability', prof_availability)
-    if ('username' in session):
-        prof_object = controller.search_prof(session['username'])
-        return render_template('account.html', result=prof_object)
-    return render_template('index.html')
+    prof_object = controller.search_prof(session['username'])
+    return render_template('account.html', result=prof_object)
