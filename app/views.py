@@ -135,7 +135,7 @@ def create_new_user():
 """
 @app.route('/prof/<uuid>')
 def render_permalinked_prof_page(uuid):
-    prof = controller.search_prof(uuid, 'id')
+    prof = controller.search_prof(uuid, 'id')[1]
     if (prof.availability == True):
         status = "Is in office "
     else:
