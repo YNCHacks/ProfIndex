@@ -4,7 +4,7 @@ from app import app
 from app.controllers.controller import *
 from flask import render_template, request, g, redirect, url_for
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
-from functools import wraps
+#from boto3.s3.connection import S3Connection
 import urllib2, re, flask
 
 app.secret_key = '\x90\xfd*"\x9e\'\xe2]\xbd\xa3\x8f,\xca\\\x0e\xd9\x92\xdd\xdc~\xcfKM\x8d'
@@ -44,9 +44,8 @@ def load_user(username):
 """
 @app.route('/')
 def index():
-    print(current_user.is_authenticated)
     names = controller.get_all_professor_names()
-    return render_template('index.html', names=names)
+    return render_template('index.html', names=names, current_user=current_user)
 
 """
     Renders the login page

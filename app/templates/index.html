@@ -22,11 +22,11 @@
 </head>
 <body>
     <div class="nav" style="margin-bottom: 100px;">
-        {% if current_user.is_authenticated == False %}
+        {% if current_user.is_authenticated %}
+        <a href="/account/">{{current_user.name}}</a>
+        {% else %}
         <a href="/signup/">Sign Up &nbsp; | </a>
         <a href="/login/">&nbsp; Login</a>
-        {% else %}
-        <a href="/account/">{{current_user.name}}</a>
         {% endif %}
     </div>
     <a href="/"><h1>Prof_Index</h1></a>
