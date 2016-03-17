@@ -9,6 +9,9 @@ __pycache__/
 # Virtualenv Folder
 /profindex
 
+# Database
+professors.json
+
 # Distribution / packaging
 .Python
 env/

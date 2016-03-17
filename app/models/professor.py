@@ -38,6 +38,21 @@ class Professor:
         self.office = prof_details["office"]
         self.office_hours = prof_details["office_hours"]
 
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.name
+
     def get_json(self):
         """
         Return professor attributes in json form
