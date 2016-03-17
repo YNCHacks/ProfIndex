@@ -135,12 +135,15 @@ def create_new_user():
 """
 @app.route('/prof/<uuid>')
 def render_permalinked_prof_page(uuid):
-    prof = controller.search_prof(uuid, 'id')[1]
-    if (prof.availability == True):
-        status = "Is in office "
-    else:
-        status = "Is not in "
-    return render_template('prof.html', prof=prof, status=status + prof.office) #TODO: do this in HTML instead
+    prof = controller.search_prof(uuid, 'id')
+    if (prof[0] == True):
+        prof = prof[1]
+        if (prof.availability == True):
+            status = "Is in office "
+        else:
+            status = "Is not in "
+        return render_template('prof.html', prof=prof, status=status + prof.office) #TODO: do this in HTML instead
+    return "error: prof id not found"
 
 """
     Gets prof name from search bar,
