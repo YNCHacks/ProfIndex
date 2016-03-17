@@ -5,7 +5,7 @@ from app.controllers.controller import *
 from flask import render_template, request, g, redirect, url_for
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 #from boto3.s3.connection import S3Connection
-import urllib2, re, flask
+import urllib2, re, flask, uuid
 
 app.secret_key = '\x90\xfd*"\x9e\'\xe2]\xbd\xa3\x8f,\xca\\\x0e\xd9\x92\xdd\xdc~\xcfKM\x8d'
 
@@ -119,7 +119,7 @@ def create_new_user():
                         "office_hours": request.form['hours'],
                         "availability": False,
                         "picture_url": get_image_url(fname, lname),
-                        'id': 'id'}
+                        'id': str(uuid.uuid4())}
 
     controller.add_professor(prof_properties)
 
