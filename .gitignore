@@ -10,7 +10,7 @@ __pycache__/
 /profindex
 
 # Database
-app/static/json/professors.json
+*.json
 
 # Distribution / packaging
 .Python
